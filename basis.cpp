@@ -1,12 +1,11 @@
 #include "basis.h"
-#include <qDebug>
 #include <QtMath>
 
 Basis::Basis(qreal j1n, qreal j2n)
 {
     j1 = j1n;
     j2 = j2n;
-    path.chop(8);
+    path.chop(QCoreApplication::applicationName().length() + 4);
     root = new State(j1 + j2, j1 + j2);
     root->corr.insert(QPair<qreal, qreal>(j1, j2), 1);
 }
@@ -46,7 +45,7 @@ void Basis::start(){
 }
 
 void Basis::J_(State *state){
-    qreal down = (state->j + state->m)*(state->j - state->m + 1);//?
+    qreal down = (state->j + state->m)*(state->j - state->m + 1);
     QList<QPair<qreal, qreal>> keys = state->corr.keys();
     QPair<qreal, qreal> tmp;
     QPair<qreal, qreal> key;
